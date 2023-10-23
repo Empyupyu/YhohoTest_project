@@ -4,6 +4,10 @@ using Voody.UniLeo;
 
 public sealed class Bootstrap : MonoBehaviour
 {
+    [SerializeField] private ConfigData _config;
+    [SerializeField] private SceneData _scene;
+
+    private GameData _game = new GameData();
     private EcsWorld _world;
     private EcsSystems _systems;
 
@@ -28,7 +32,9 @@ public sealed class Bootstrap : MonoBehaviour
 
     private void AddInjections()
     {
-
+        _systems.Inject(_config);
+        _systems.Inject(_scene);
+        _systems.Inject(_game);
     }
 
     private void AddSystems()
