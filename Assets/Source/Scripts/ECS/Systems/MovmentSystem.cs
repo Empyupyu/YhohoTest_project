@@ -4,7 +4,6 @@ using UnityEngine;
 public class MovmentSystem : IEcsRunSystem
 {
     private readonly EcsWorld _world = null;
-
     private readonly EcsFilter<MovableComponent, DirectionComponent> _filter = null;
 
     public void Run()

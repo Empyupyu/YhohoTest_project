@@ -44,7 +44,8 @@ public sealed class Bootstrap : MonoBehaviour
             Add(new InitializePlayerCameraSystem()).
             Add(new PlayerInputSystem()).
             Add(new PlayerRotationSystem()).
-            Add(new MovmentSystem());
+            Add(new MovmentSystem()).
+            Add(new PlayerAnimationSystem());
     }
 
     private void AddOneFrame()
