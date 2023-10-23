@@ -23,8 +23,8 @@ public class PlayerInputSystem : IEcsRunSystem
             directionComponent.Direction.x = joystickComponent.Joystick.Direction.x;
             directionComponent.Direction.z = joystickComponent.Joystick.Direction.y;
 
-            var f = Quaternion.Euler(cameraEuerAngleComponent.Value) * directionComponent.Direction;
-            directionComponent.Direction = f;
+            var cameraAngleOffset = Quaternion.Euler(cameraEuerAngleComponent.Value) * directionComponent.Direction;
+            directionComponent.Direction = cameraAngleOffset;
         }
     }
 }

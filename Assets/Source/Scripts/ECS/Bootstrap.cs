@@ -40,6 +40,7 @@ public sealed class Bootstrap : MonoBehaviour
     private void AddSystems()
     {
         _systems.
+            Add(new PlayerSpawnSystem()).
             Add(new PlayerInputSystem()).
             Add(new MovmentSystem());
     }

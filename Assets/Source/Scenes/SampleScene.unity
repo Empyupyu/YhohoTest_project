@@ -488,6 +488,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
   m_PrefabInstance: {fileID: 878030370}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &878030372 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170153791668043265, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+  m_PrefabInstance: {fileID: 878030370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b642762303b594946a8eaa365e8d64e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Joystick>k__BackingField: {fileID: 878030372}
   <PlayerSpawnPoint>k__BackingField: {fileID: 4955313142426350708}
 --- !u!1001 &832793281435497330
 PrefabInstance:
