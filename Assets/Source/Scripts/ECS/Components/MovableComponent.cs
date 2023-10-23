@@ -1,6 +1,5 @@
 using System;
 using UnityEngine.AI;
-
 [Serializable]
 public struct MovableComponent 
 {
