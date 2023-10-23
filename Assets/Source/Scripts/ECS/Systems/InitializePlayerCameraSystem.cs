@@ -1,5 +1,4 @@
 ﻿using Leopotam.Ecs;
-
 public class InitializePlayerCameraSystem : IEcsInitSystem
 {
     private readonly EcsWorld _world;
