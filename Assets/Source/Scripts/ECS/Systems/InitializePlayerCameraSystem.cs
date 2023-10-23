@@ -2,10 +2,9 @@
 
 public class InitializePlayerCameraSystem : IEcsInitSystem
 {
-    private EcsWorld _ecsWorld;
-    private ConfigData _config;
-    private SceneData _scene;
-    private GameData _game;
+    private readonly EcsWorld _ecsWorld;
+    private readonly SceneData _scene;
+    private readonly GameData _game;
 
     public void Init()
     {
@@ -14,6 +13,6 @@ public class InitializePlayerCameraSystem : IEcsInitSystem
 
         _scene.PlayerCamera.m_Follow = _game.PlayerTransform;
         _scene.PlayerCamera.m_LookAt = _game.PlayerTransform;
-        cameraAngle.Value = _scene.PlayerCamera.transform.eulerAngles;
+        cameraAngle.Value.y = _scene.PlayerCamera.transform.eulerAngles.y;
     }
 }

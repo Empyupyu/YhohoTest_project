@@ -43,6 +43,7 @@ public sealed class Bootstrap : MonoBehaviour
             Add(new PlayerSpawnSystem()).
             Add(new InitializePlayerCameraSystem()).
             Add(new PlayerInputSystem()).
+            Add(new PlayerRotationSystem()).
             Add(new MovmentSystem());
     }
 

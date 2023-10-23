@@ -1,6 +1,5 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
-
 public class PlayerInputSystem : IEcsRunSystem
 {
     private readonly EcsWorld _world = null;
@@ -21,7 +20,7 @@ public class PlayerInputSystem : IEcsRunSystem
             ref var cameraEuerAngleComponent = ref _cameraFilter.Get1(0);
 
             directionComponent.Direction.x = joystickComponent.Joystick.Direction.x;
-            directionComponent.Direction.z = -joystickComponent.Joystick.Direction.y;
+            directionComponent.Direction.z = joystickComponent.Joystick.Direction.y;
 
             var cameraAngleOffset = Quaternion.Euler(cameraEuerAngleComponent.Value) * directionComponent.Direction;
             directionComponent.Direction = cameraAngleOffset;

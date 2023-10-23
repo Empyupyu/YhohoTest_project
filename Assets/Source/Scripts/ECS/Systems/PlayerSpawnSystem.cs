@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.AI;
 public class PlayerSpawnSystem : IEcsInitSystem
 {
-    private EcsWorld _ecsWorld;
-    private ConfigData _config;
-    private SceneData _scene;
-    private GameData _game;
+    private readonly EcsWorld _ecsWorld;
+    private readonly ConfigData _config;
+    private readonly SceneData _scene;
+    private readonly GameData _game;
 
     public void Init()
     {
