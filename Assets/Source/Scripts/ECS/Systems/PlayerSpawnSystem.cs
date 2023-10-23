@@ -1,22 +1,12 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.AI;
-public class PlayerCameraSystem : IEcsInitSystem
-{
-    private EcsWorld _ecsWorld;
-    private ConfigData _config;
-    private SceneData _scene;
-
-    public void Init()
-    {
-        
-    }
-}
 public class PlayerSpawnSystem : IEcsInitSystem
 {
     private EcsWorld _ecsWorld;
     private ConfigData _config;
     private SceneData _scene;
+    private GameData _game;
 
     public void Init()
     {
@@ -29,6 +19,7 @@ public class PlayerSpawnSystem : IEcsInitSystem
         ref var direction = ref playerEntity.Get<DirectionComponent>();
 
         var playerGO = SpawnPlayerModel();
+        _game.PlayerTransform = playerGO.transform;
 
         movable.Agent = playerGO.GetComponent<NavMeshAgent>();
         movable.Speed = _config.PlayerBaseSpeed;
