@@ -1,16 +1,26 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.AI;
-
-public class PlayerSpawnSystem : IEcsInitSystem
+public class PlayerCameraSystem : IEcsInitSystem
 {
-    private EcsWorld ecsWorld;
+    private EcsWorld _ecsWorld;
     private ConfigData _config;
     private SceneData _scene;
 
     public void Init()
     {
-        EcsEntity playerEntity = ecsWorld.NewEntity();
+        
+    }
+}
+public class PlayerSpawnSystem : IEcsInitSystem
+{
+    private EcsWorld _ecsWorld;
+    private ConfigData _config;
+    private SceneData _scene;
+
+    public void Init()
+    {
+        EcsEntity playerEntity = _ecsWorld.NewEntity();
 
         ref var player = ref playerEntity.Get<PlayerTag>();
         ref var joystick = ref playerEntity.Get<JoystickComponent>();
