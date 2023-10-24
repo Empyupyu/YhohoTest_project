@@ -17,3 +17,6 @@ MonoBehaviour:
   - {fileID: 100000, guid: 8d6bfc94ac848e44fa3ea960cafade25, type: 3}
   - {fileID: 100000, guid: 39c227bde330ed042adad72fb8200d1a, type: 3}
   - {fileID: 100000, guid: 0e403fe3a7e2d2347b900d40c88f6f76, type: 3}
+  <CookOvenPrefab>k__BackingField: {fileID: 0}
+  <CookingRate>k__BackingField: 0
+  <CookOvenCapacity>k__BackingField: 10

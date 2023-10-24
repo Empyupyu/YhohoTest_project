@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerPrefab>k__BackingField: {fileID: 659569693838698063, guid: 6a4c1d74c2e287e4abeed6916113d9f2, type: 3}
   <PlayerBaseSpeed>k__BackingField: 4
+  <PlayerBaseStackCapacity>k__BackingField: 5
   <DonutsData>k__BackingField: {fileID: 11400000, guid: b87516f674c400142a4c52c21d7b1bd4, type: 2}
