@@ -1,5 +1,5 @@
-﻿using Leopotam.Ecs;
-using UnityEngine;
+﻿using Lean.Pool;
+using Leopotam.Ecs;
 
 public class DestructionSystem : IEcsRunSystem
 {
@@ -11,7 +11,7 @@ public class DestructionSystem : IEcsRunSystem
         {
             ref var destroyItem = ref _eatFilter.Get1(item);
 
-            GameObject.Destroy(destroyItem.GameObject);
+            LeanPool.Despawn(destroyItem.GameObject);
         }
     }
 }

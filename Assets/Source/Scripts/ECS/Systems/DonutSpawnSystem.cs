@@ -1,4 +1,5 @@
-﻿using Leopotam.Ecs;
+﻿using Lean.Pool;
+using Leopotam.Ecs;
 using UnityEngine;
 public class DonutSpawnSystem : IEcsRunSystem
 {
@@ -12,7 +13,7 @@ public class DonutSpawnSystem : IEcsRunSystem
             ref var cookOvenEntity = ref _cookOvenFilter.GetEntity(item);
             ref var stack = ref _cookOvenFilter.Get2(item);
 
-            var donut = Object.Instantiate(GetDonutRandomVariant(), stack.StackPoint);
+            var donut = LeanPool.Spawn(GetDonutRandomVariant(), stack.StackPoint);
 
             ref var addRequest = ref cookOvenEntity.Get<AddToStackRequestComponent>();
             addRequest.Item = donut.transform;
