@@ -1,4 +1,5 @@
-﻿using Leopotam.Ecs;
+﻿using System.Collections.Generic;
+using Leopotam.Ecs;
 
 public class InitializeCookOvenSystem : IEcsInitSystem
 {
@@ -9,14 +10,22 @@ public class InitializeCookOvenSystem : IEcsInitSystem
 
     public void Init()
     {
+        var entity = _world.NewEntity();
         _game.CookOvenTransform = _scene.CookOven.transform;
 
-        var stack = _game.CookOvenTransform.GetComponentInChildren<Stack>();
-        stack.Initialize(_world);
-        ref var timer = ref stack.Entity.Get<TimerComponent>();
-        timer.Timer = _config.DonutsData.CookingRate;
-        ref var initializeStack = ref stack.Entity.Get<InitializeStackComponent>();
-        initializeStack.Stack = stack;
+        ref var timer = ref entity.Get<TimerComponent>();
+        ref var stackText = ref entity.Get<WorldUITextComponent>();
+        ref var lookAtCameraUI = ref entity.Get<LookAtCameraUIComponent>();
+        ref var initializeStack = ref entity.Get<InitializeStackComponent>();
+        ref var cooking = ref entity.Get<CookingComponent>();
+        entity.Get<ItemGiverComponent>();
+        entity.Get<ClientsComponent>().Clients = new List<EcsEntity>();
+
+        timer.StartTime = _config.DonutsData.CookingRate;
+        timer.TimePassed = timer.StartTime;
         initializeStack.Capacity = _config.DonutsData.CookOvenCapacity;
+        initializeStack.StackOwnerTransform = _game.CookOvenTransform;
+
+        _game.CookOvenTransform.GetComponent<StackTriggerZone>().Initialize(entity, _world);
     }
 }

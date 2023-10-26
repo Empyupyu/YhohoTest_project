@@ -16,3 +16,4 @@ MonoBehaviour:
   <PlayerBaseSpeed>k__BackingField: 4
   <PlayerBaseStackCapacity>k__BackingField: 5
   <DonutsData>k__BackingField: {fileID: 11400000, guid: b87516f674c400142a4c52c21d7b1bd4, type: 2}
+  <TableData>k__BackingField: {fileID: 11400000, guid: e4c0cfe7b2ef4034b8ccbbe32fcc35b5, type: 2}

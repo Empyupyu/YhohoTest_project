@@ -9,7 +9,8 @@ public sealed class Bootstrap : MonoBehaviour
 
     private GameData _game = new GameData();
     private EcsWorld _world;
-    private EcsSystems _systems;
+    private EcsSystems _systemsUpdate;
+    private EcsSystems _systemsLateUpdate;
 
     private void Start()
     {
@@ -19,34 +20,62 @@ public sealed class Bootstrap : MonoBehaviour
     private void Initialize()
     {
         _world = new EcsWorld();
-        _systems = new EcsSystems(_world);
-
-        _systems.ConvertScene();
+        _systemsUpdate = new EcsSystems(_world);
+        _systemsLateUpdate = new EcsSystems(_world);
+        _systemsUpdate.ConvertScene();
+        _systemsLateUpdate.ConvertScene();
 
         AddInjections();
         AddSystems();
         AddOneFrame();
 
-        _systems.Init();
+        _systemsUpdate.Init();
+        _systemsLateUpdate.Init();
     }
 
     private void AddInjections()
     {
-        _systems.Inject(_config);
-        _systems.Inject(_scene);
-        _systems.Inject(_game);
+        _systemsUpdate.Inject(_config);
+        _systemsUpdate.Inject(_scene);
+        _systemsUpdate.Inject(_game);
+        _systemsLateUpdate.Inject(_config);
+        _systemsLateUpdate.Inject(_scene);
+        _systemsLateUpdate.Inject(_game);
     }
 
     private void AddSystems()
     {
-        _systems.
-            Add(new PlayerSpawnSystem()).
-            Add(new InitializeStackSystem()).
-            Add(new InitializePlayerCameraSystem()).
-            Add(new PlayerInputSystem()).
-            Add(new PlayerRotationSystem()).
-            Add(new MovmentSystem()).
-            Add(new PlayerAnimationSystem());
+        _systemsUpdate.
+        Add(new PlayerInitializeSystem()).
+        Add(new InitializePlayerCameraSystem()).
+        Add(new InitializeCookOvenSystem()).
+        Add(new InitializeTablesSystem()).
+        Add(new StackUISystem()).
+        Add(new InitializeStackSystem())
+            .OneFrame<InitializeStackComponent>().
+        Add(new PlayerInputSystem()).
+        Add(new PlayerRotationSystem()).
+        Add(new MovmentSystem()).
+        Add(new TimerSystem()).
+        Add(new ClientsSystem())
+            .OneFrame<AddClientRequestComponent>()
+            .OneFrame<RemoveClientRequestComponent>().
+        Add(new ItemGiverSystem()).
+        Add(new ItemReceiverSystem()).
+        Add(new EatingLaunchSystem()).
+        Add(new EatingSystem()).
+        Add(new CookingSystem()).
+        Add(new DonutSpawnSystem()).
+            OneFrame<NewItemInStackEventComponent>().
+        Add(new StackSystem()).
+            OneFrame<AddToStackRequestComponent>().
+            OneFrame<RemoveFromStackRequestComponent>().
+        Add(new DestructionSystem()).
+            OneFrame<DestructRequestComponent>().
+        Add(new PlayerAnimationSystem())
+        ;
+
+        _systemsLateUpdate.Add(new LookAtCameraWorldUISystem());
     }
 
     private void AddOneFrame()
@@ -56,15 +85,21 @@ public sealed class Bootstrap : MonoBehaviour
 
     private void Update()
     {
-        _systems.Run();
+        _systemsUpdate.Run();
+
+    }
+
+    private void LateUpdate()
+    {
+        _systemsLateUpdate.Run();
     }
 
     private void OnDestroy()
     {
-        if (_systems == null) return; 
+        if (_systemsUpdate == null) return; 
 
-        _systems.Destroy();
-        _systems = null;
+        _systemsUpdate.Destroy();
+        _systemsUpdate = null;
         _world.Destroy();
         _world = null;
     }

@@ -1,6 +1,4 @@
 ﻿using Leopotam.Ecs;
-using UnityEngine;
-
 public class CookingSystem : IEcsRunSystem
 {
     private readonly EcsWorld _world;
@@ -8,7 +6,7 @@ public class CookingSystem : IEcsRunSystem
     private readonly SceneData _scene;
     private readonly GameData _game;
 
-    private readonly EcsFilter<TimerComponent, StackComponent>.Exclude<StackIsFullComponent> _cookOvenFilter;
+    private readonly EcsFilter<TimerComponent, StackComponent, TimerCompletedComponent, CookingComponent>.Exclude<StackIsFullComponent> _cookOvenFilter;
 
     public void Run()
     {
@@ -18,12 +16,8 @@ public class CookingSystem : IEcsRunSystem
             ref var timer = ref _cookOvenFilter.Get1(item);
             ref var stack = ref _cookOvenFilter.Get2(item);
 
-            timer.Timer -= Time.deltaTime;
-
-            if (timer.Timer > 0) continue;
-
-            timer.Timer = _config.DonutsData.CookingRate;
             ref var completeCook = ref entity.Get<CompleteCookComponent>();
+            entity.Del<TimerCompletedComponent>();
         }
     }
 }
