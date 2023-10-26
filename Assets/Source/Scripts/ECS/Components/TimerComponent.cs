@@ -1,7 +1,7 @@
 ﻿using System;
-
 [Serializable]
 public struct TimerComponent
 {
-    public float Timer;
+    public float TimePassed;
+    public float StartTime;
 }

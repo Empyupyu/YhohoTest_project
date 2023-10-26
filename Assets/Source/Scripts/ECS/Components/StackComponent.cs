@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public struct StackComponent
 {
-    public Stack Stack;
+    public Transform StackPoint;
     public List<Transform> Items;
     public int Capacity;
 }

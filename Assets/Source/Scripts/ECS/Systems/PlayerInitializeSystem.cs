@@ -1,7 +1,8 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.AI;
-public class PlayerSpawnSystem : IEcsInitSystem
+
+public class PlayerInitializeSystem : IEcsInitSystem
 {
     private readonly EcsWorld _world;
     private readonly ConfigData _config;
@@ -10,6 +11,9 @@ public class PlayerSpawnSystem : IEcsInitSystem
 
     public void Init()
     {
+        var playerGO = SpawnPlayerModel();
+        _game.PlayerTransform = playerGO.transform;
+
         EcsEntity playerEntity = _world.NewEntity();
 
         ref var player = ref playerEntity.Get<PlayerTag>();
@@ -18,15 +22,15 @@ public class PlayerSpawnSystem : IEcsInitSystem
         ref var transform = ref playerEntity.Get<TransformReferenceComponent>();
         ref var direction = ref playerEntity.Get<DirectionComponent>();
         ref var animator = ref playerEntity.Get<AnimatorComponent>();
-
-        var playerGO = SpawnPlayerModel();
-        _game.PlayerTransform = playerGO.transform;
+        ref var initializeStack = ref playerEntity.Get<InitializeStackComponent>();
 
         animator.Animator = playerGO.transform.GetComponentInChildren<Animator>();
         movable.Agent = playerGO.GetComponent<NavMeshAgent>();
         movable.Speed = _config.PlayerBaseSpeed;
         transform.Value = playerGO.transform;
         joystick.Joystick = _scene.Joystick;
+        initializeStack.Capacity = _config.PlayerBaseStackCapacity;
+        initializeStack.StackOwnerTransform = _game.PlayerTransform;
     }
 
     private GameObject SpawnPlayerModel()

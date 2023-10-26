@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public struct PickUpbleComponent
+public struct CookingComponent
 {
     
 }

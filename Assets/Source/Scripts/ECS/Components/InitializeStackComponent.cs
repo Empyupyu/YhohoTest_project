@@ -1,8 +1,9 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public struct InitializeStackComponent
 {
-    public Stack Stack;
+    public Transform StackOwnerTransform;
     public int Capacity;
 }

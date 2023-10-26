@@ -2,10 +2,7 @@
 using UnityEngine;
 public class DonutSpawnSystem : IEcsRunSystem
 {
-    private readonly EcsWorld _world;
     private readonly ConfigData _config;
-    private readonly SceneData _scene;
-    private readonly GameData _game;
     private readonly EcsFilter<CompleteCookComponent, StackComponent> _cookOvenFilter;
 
     public void Run()
@@ -15,12 +12,11 @@ public class DonutSpawnSystem : IEcsRunSystem
             ref var cookOvenEntity = ref _cookOvenFilter.GetEntity(item);
             ref var stack = ref _cookOvenFilter.Get2(item);
 
-            var donutEntity = _world.NewEntity();
-            var donut = Object.Instantiate(GetDonutRandomVariant(), stack.Stack.transform);
-            ref var pickUpble = ref donutEntity.Get<PickUpbleComponent>();
+            var donut = Object.Instantiate(GetDonutRandomVariant(), stack.StackPoint);
 
-            ref var addToStack = ref cookOvenEntity.Get<AddToStackComponent>();
-            addToStack.Item = donut.transform;
+            ref var addRequest = ref cookOvenEntity.Get<AddToStackRequestComponent>();
+            addRequest.Item = donut.transform;
+            addRequest.StackEntity = cookOvenEntity;
 
             ref var entity = ref _cookOvenFilter.GetEntity(item);
             entity.Del<CompleteCookComponent>();

@@ -1,6 +1,5 @@
 using Leopotam.Ecs;
 using UnityEngine;
-
 public class MovmentSystem : IEcsRunSystem
 {
     private readonly EcsWorld _world = null;
